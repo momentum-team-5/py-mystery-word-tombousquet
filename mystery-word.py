@@ -15,13 +15,13 @@ def show_guessed_so_far(word_to_guess, letters_to_guess, letters_guessed):
     3. Return the output string.
     """    
 
-    output_string = f"{word_to_guess}"
+    output_string = "_ ".join(word_to_guess)
+    
     for letter in letters_to_guess:
         if letter not in letters_guessed:
-            output_string.replace(f"{letter}", "_")
-        else:
-            continue
-        return output_string     
+            output_string = output_string.replace(letter, "_")
+    print (output_string)
+             
 
 
 def get_guess(letters_guessed):
@@ -73,7 +73,7 @@ def play_game(word_to_guess):
     print(f"Your word has {len(word_to_guess)} letters.")
 
     while guesses_used < NUM_TURNS:
-        show_guessed_so_far(word_to_guess, letters_to_guess, letters_guessed)
+        (show_guessed_so_far(word_to_guess, letters_to_guess, letters_guessed))
 
         new_guess = get_guess(letters_guessed)
         letters_guessed.add(new_guess)
