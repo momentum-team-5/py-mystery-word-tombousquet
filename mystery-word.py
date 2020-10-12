@@ -119,16 +119,18 @@ def filtered_by_difficulty(words, desired_difficulty):
         1c. if 'hard', filter from `words` all words whose length is less than 8.
     2. Return the list obtained in step 1.
     """
+    easy_words = [word for word in words if 4 <= len(word) <= 6]
+    normal_words = [word for word in words if 6 <= len(word) <= 8]
+    hard_words = [word for word in words if 8 < len(word)]
 
     if desired_difficulty == "easy":
-        filtered_words = [word for word in words if 4 <= len(word) <= 6]
+        return easy_words
 
-    elif desired_difficulty == "normal":
-        filtered_words = [word for word in words if 6 <= len(word) <= 8]
+    if desired_difficulty == "normal":
+        return normal_words
 
-    else:
-        filtered_words = [word for word in words if 8 <= len(word)]  
-    return filtered_words          
+    if desired_difficulty == "hard":  
+        return hard_words          
     
 
 
