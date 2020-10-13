@@ -15,7 +15,7 @@ def show_guessed_so_far(word_to_guess, letters_to_guess, letters_guessed):
     3. Return the output string.
     """    
 
-    output_string = "_ ".join(word_to_guess)
+    output_string = " ".join(word_to_guess)
     
     for letter in letters_to_guess:
         if letter not in letters_guessed:
@@ -25,23 +25,53 @@ def show_guessed_so_far(word_to_guess, letters_to_guess, letters_guessed):
 
 
 def get_guess(letters_guessed):
-    guess = input("Guess a letter: ")
-    if len(guess) > 1:
-        print("Please guess one letter at a time")
-    return guess
+    while True:
+        guess = input("Guess a letter: ").lower()
+
+        if len(guess) > 1:
+            print("Please guess one letter at a time")
+
+        elif not guess.isalpha():
+            print("Please guess letters only.")
+
+        elif guess in letters_guessed:
+            print("You've already guessed that!")
+            print(f"As a reminder, you've guessed ({', '.join(letters_guessed)}).") 
+
+        else:
+            return guess           
+    
     
           
 def prompt_play_again(): 
-    print("Would you like to play again?")
-    user_input = input("Please select yes or no: ").lower()
-    while user_input != "yes" and user_input != "no":
-        user_input = input("Please select yes or no: ").lower()
-    return user_input == "yes"
-          
+    # print("Would you like to play again?")
+    # user_input = input("Please select yes or no: ").lower()
+    # while user_input != "yes" and user_input != "no":
+    #     user_input = input("Please select yes or no: ").lower()
+    # return user_input == "yes"
+
+    # OR 
+    while True:
+        user_selecion = input("Play again? ('yes'/'no'): ").lower()
+
+        if user_selecion == 'yes':
+            return True
+
+        elif user_selecion == 'no':
+            return False
+
+        print ("Invalid selection. Enter 'yes' or 'no'.")              
 
    
 def check_victory(letters_guessed, letters_to_guess):
     return letters_guessed >= letters_to_guess
+
+    # OR
+    # for letter in letters_to_guess:
+        # if letter not in letters_guessed
+        #     return False
+
+    # return True        
 
 
 def play_game(word_to_guess):
@@ -154,13 +184,20 @@ def get_user_difficulty():
         2c. otherwise, return the user input (normalize to lowercase).
     """
     
-    print ("Please select from the following difficulty levels:")
-    difficulty_input = input("easy, normal, or hard: ").lower()
-    while difficulty_input != "easy" and difficulty_input != "normal" and difficulty_input != "hard":
-        difficulty_input = input("Invalid input. Please select easy, normal, or hard: ").lower()   
-    return difficulty_input   
-     
-        
+    # print ("Please select from the following difficulty levels:")
+    # difficulty_input = input("easy, normal, or hard: ").lower()
+    # while difficulty_input != "easy" and difficulty_input != "normal" and difficulty_input != "hard":
+    #     difficulty_input = input("Invalid input. Please select easy, normal, or hard: ").lower()   
+    # return difficulty_input   
+    
+    # OR 
+    while True:
+        user_input = input("Select a  difficulty ('easy', 'normal', 'hard'): ").lower()
+
+        if user_input in {'easy', 'normal', 'hard'}:
+            return user_input
+
+    print ("Invalid difficulty. Valid values are 'easy', 'normal', and 'hard'.")            
 
 
 def run_game_loop():
